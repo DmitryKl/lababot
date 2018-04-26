@@ -37,7 +37,7 @@ now = datetime.datetime.now()
 
 
 def main():  
-    
+    new_offset = None
     while True:
         greet_bot.get_updates(new_offset)
         last_update = greet_bot.get_last_update()
@@ -48,7 +48,7 @@ def main():
         last_chat_name = last_update['message']['chat']['first_name']
 
         greet_bot.send_message(last_chat_id, 'Hell0, {}'.format(last_chat_name))
-        
+        new_offset = last_update_id + 1
 
 if __name__ == '__main__':  
     try:
