@@ -5,7 +5,7 @@ class BotHandler:
 
     def __init__(self, token):
         self.token = token
-        self.api_url = "https://api.telegram.org/bot594399782:AAHYpVXDRp8ByAWK_kOb1ep6dpAShaTocuo/".format(token)
+        self.api_url = "https://api.telegram.org/bot{}/".format(token)
 
     def get_updates(self, offset=None, timeout=30):
         method = 'getUpdates'
@@ -30,6 +30,7 @@ class BotHandler:
 
         return last_update
     
+token = "594399782:AAHYpVXDRp8ByAWK_kOb1ep6dpAShaTocuo"
 greet_bot = BotHandler(token)  
 greetings = ('здравствуй', 'привет', 'ку', 'здорово')  
 now = datetime.datetime.now()
