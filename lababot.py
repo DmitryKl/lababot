@@ -20,6 +20,14 @@ class BotHandler:
         resp = requests.post(self.api_url + method, params)
         return resp
 
+    def get_poloniex_info(self, pair):
+        url = r"https://poloniex.com/public?command=returnTicker"
+        resp = requests.get(url)
+        if pair in resp:
+            return 'Курс {} = {}'.format(pair, resp[pair][last])
+        else:
+            return "Пара не найдена"
+
     def get_last_update(self):
         get_result = self.get_updates()
 
@@ -32,8 +40,6 @@ class BotHandler:
     
 token = "594399782:AAHYpVXDRp8ByAWK_kOb1ep6dpAShaTocuo"
 greet_bot = BotHandler(token)  
-greetings = ('здравствуй', 'привет', 'ку', 'здорово')  
-now = datetime.datetime.now()
 
 
 def main():  
@@ -47,7 +53,10 @@ def main():
         last_chat_id = last_update['message']['chat']['id']
         last_chat_name = last_update['message']['chat']['first_name']
 
-        greet_bot.send_message(last_chat_id, 'Hell0, {}'.format(last_chat_name))
+        pair = last_chat_text.strip().replace(" ", "_")
+        text = greet_bot.get_poloniex_info(pair)
+
+        greet_bot.send_message(last_chat_id, text)
         new_offset = last_update_id + 1
 
 if __name__ == '__main__':  
