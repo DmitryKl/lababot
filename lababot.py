@@ -38,7 +38,7 @@ class BotHandler:
 
         return last_update
     
-token = "594399782:AAHYpVXDRp8ByAWK_kOb1ep6dpAShaTocuo"
+token = ""
 greet_bot = BotHandler(token)  
 
 
